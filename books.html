@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books - LibroZone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>LibroZone</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="books.html" class="active">Books</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="profile.html">My Library</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" id="navSearch" placeholder="Search books...">
+                    <button onclick="searchBooks()"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="profile.html" class="user-avatar">
+                    <img src="https://via.placeholder.com/40" alt="User">
+                </a>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Books Section -->
+    <section class="books-page">
+        <div class="books-header">
+            <h1>Explore Our <span class="gradient-text">Collection</span></h1>
+            <div class="books-controls">
+                <div class="search-filter">
+                    <input type="text" id="mainSearch" placeholder="Search by title, author, or ISBN...">
+                    <button onclick="filterBooks()"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <select id="categoryFilter" onchange="filterBooks()">
+                        <option value="">All Categories</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="education">Education</option>
+                        <option value="technology">Technology</option>
+                        <option value="business">Business</option>
+                        <option value="science">Science</option>
+                    </select>
+                    <select id="sortFilter" onchange="sortBooks()">
+                        <option value="newest">Newest First</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="az">A-Z</option>
+                    </select>
+                    <div class="view-toggle">
+                        <button class="active" onclick="toggleView('grid')"><i class="fas fa-th"></i></button>
+                        <button onclick="toggleView('list')"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="books-layout">
+            <!-- Sidebar Filters -->
+            <aside class="filters-sidebar">
+                <div class="filter-section">
+                    <h3><i class="fas fa-filter"></i> Filters</h3>
+                    <div class="filter-group">
+                        <h4>Rating</h4>
+                        <label class="checkbox">
+                            <input type="checkbox" value="5" onchange="filterBooks()">
+                            <span>⭐⭐⭐⭐⭐ (5 Stars)</span>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="4" onchange="filterBooks()">
+                            <span>⭐⭐⭐⭐ & up</span>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="3" onchange="filterBooks()">
+                            <span>⭐⭐⭐ & up</span>
+                        </label>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Format</h4>
+                        <label class="checkbox">
+                            <input type="checkbox" value="pdf" onchange="filterBooks()">
+                            <span>PDF</span>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="epub" onchange="filterBooks()">
+                            <span>EPUB</span>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="mobi" onchange="filterBooks()">
+                            <span>MOBI</span>
+                        </label>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Language</h4>
+                        <label class="checkbox">
+                            <input type="checkbox" value="english" onchange="filterBooks()">
+                            <span>English</span>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="spanish" onchange="filterBooks()">
+                            <span>Spanish</span>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="french" onchange="filterBooks()">
+                            <span>French</span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Books Grid -->
+            <div class="books-content">
+                <div class="books-grid" id="booksContainer">
+                    <!-- Books populated by JavaScript -->
+                </div>
+                <div class="pagination" id="pagination">
+                    <button onclick="changePage(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <span id="pageInfo">Page 1 of 10</span>
+                    <button onclick="changePage(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Detail Modal -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content book-modal">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="book-detail">
+                <div class="book-detail-image">
+                    <img id="modalBookCover" src="" alt="Book Cover">
+                </div>
+                <div class="book-detail-info">
+                    <h2 id="modalBookTitle">Book Title</h2>
+                    <p class="book-author" id="modalBookAuthor">by Author Name</p>
+                    <div class="book-rating" id="modalBookRating">
+                        ⭐⭐⭐⭐⭐ <span>(4.8/5)</span>
+                    </div>
+                    <div class="book-meta">
+                        <span id="modalBookCategory"><i class="fas fa-tag"></i> Fiction</span>
+                        <span id="modalBookPages"><i class="fas fa-file-alt"></i> 320 pages</span>
+                        <span id="modalBookLanguage"><i class="fas fa-globe"></i> English</span>
+                    </div>
+                    <p class="book-description" id="modalBookDesc">
+                        Book description goes here...
+                    </p>
+                    <div class="book-actions">
+                        <button class="btn btn-primary" onclick="readBook()">
+                            <i class="fas fa-book-open"></i> Read Now
+                        </button>
+                        <button class="btn btn-secondary" onclick="downloadBook()">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button class="btn btn-outline" onclick="addToFavorites()">
+                            <i class="fas fa-heart"></i> Add to Favorites
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/books.js"></script>
+</body>
+</html>

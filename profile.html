@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library - LibroZone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>LibroZone</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="profile.html" class="active">My Library</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" id="navSearch" placeholder="Search books...">
+                    <button onclick="searchBooks()"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="profile.html" class="user-avatar">
+                    <img src="https://via.placeholder.com/40" alt="User">
+                </a>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Dashboard -->
+    <section class="profile-page">
+        <div class="profile-sidebar">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <img src="https://via.placeholder.com/150" alt="Profile">
+                    <button class="edit-avatar"><i class="fas fa-camera"></i></button>
+                </div>
+                <h2>John Doe</h2>
+                <p>john.doe@example.com</p>
+                <span class="badge premium">Premium Member</span>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <h4>42</h4>
+                        <span>Books Read</span>
+                    </div>
+                    <div class="stat">
+                        <h4>156</h4>
+                        <span>Hours</span>
+                    </div>
+                    <div class="stat">
+                        <h4>12</h4>
+                        <span>Favorites</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="profile-nav">
+                <a href="#" class="active" onclick="showSection('reading')">
+                    <i class="fas fa-book-reader"></i> Currently Reading
+                </a>
+                <a href="#" onclick="showSection('favorites')">
+                    <i class="fas fa-heart"></i> My Favorites
+                </a>
+                <a href="#" onclick="showSection('downloads')">
+                    <i class="fas fa-download"></i> Downloads
+                </a>
+                <a href="#" onclick="showSection('history')">
+                    <i class="fas fa-history"></i> Reading History
+                </a>
+                <a href="#" onclick="showSection('settings')">
+                    <i class="fas fa-cog"></i> Account Settings
+                </a>
+                <a href="#" class="logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <div class="profile-content">
+            <!-- Currently Reading -->
+            <div id="reading" class="content-section active">
+                <h2>Currently Reading</h2>
+                <div class="reading-grid">
+                    <div class="reading-card">
+                        <img src="https://via.placeholder.com/120x180" alt="Book">
+                        <div class="reading-info">
+                            <h3>The Great Gatsby</h3>
+                            <p>F. Scott Fitzgerald</p>
+                            <div class="reading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 65%"></div>
+                                </div>
+                                <span>65% completed</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="continueReading()">
+                                Continue Reading
+                            </button>
+                        </div>
+                    </div>
+                    <div class="reading-card">
+                        <img src="https://via.placeholder.com/120x180" alt="Book">
+                        <div class="reading-info">
+                            <h3>Clean Code</h3>
+                            <p>Robert C. Martin</p>
+                            <div class="reading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 30%"></div>
+                                </div>
+                                <span>30% completed</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="continueReading()">
+                                Continue Reading
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorites -->
+            <div id="favorites" class="content-section">
+                <h2>My Favorites</h2>
+                <div class="books-grid compact" id="favoritesGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Downloads -->
+            <div id="downloads" class="content-section">
+                <h2>My Downloads</h2>
+                <div class="downloads-list">
+                    <div class="download-item">
+                        <img src="https://via.placeholder.com/60x90" alt="Book">
+                        <div class="download-info">
+                            <h4>JavaScript: The Good Parts</h4>
+                            <p>Douglas Crockford • PDF • 2.4 MB</p>
+                            <span class="date">Downloaded: Mar 15, 2026</span>
+                        </div>
+                        <div class="download-actions">
+                            <button class="btn btn-icon"><i class="fas fa-book-open"></i></button>
+                            <button class="btn btn-icon"><i class="fas fa-redo"></i></button>
+                            <button class="btn btn-icon delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reading History -->
+            <div id="history" class="content-section">
+                <h2>Reading History</h2>
+                <div class="history-timeline">
+                    <div class="history-item">
+                        <div class="history-date">Today</div>
+                        <div class="history-content">
+                            <img src="https://via.placeholder.com/50x75" alt="Book">
+                            <div>
+                                <h4>Read 45 pages of "The Great Gatsby"</h4>
+                                <p>Chapter 3 - 45 minutes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-date">Yesterday</div>
+                        <div class="history-content">
+                            <img src="https://via.placeholder.com/50x75" alt="Book">
+                            <div>
+                                <h4>Completed "Atomic Habits"</h4>
+                                <p>320 pages total</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Settings -->
+            <div id="settings" class="content-section">
+                <h2>Account Settings</h2>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" value="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" value="john.doe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" value="+1 234 567 890">
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <textarea rows="3">Book lover and lifelong learner 📚</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Reading Preferences</label>
+                        <div class="preferences">
+                            <label class="checkbox">
+                                <input type="checkbox" checked>
+                                <span>Fiction</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" checked>
+                                <span>Technology</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                <span>Business</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

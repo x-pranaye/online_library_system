@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading - LibroZone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reader.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="reader-mode">
+    <!-- Reader Toolbar -->
+    <div class="reader-toolbar">
+        <div class="toolbar-left">
+            <a href="books.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <h2 id="readerBookTitle">The Great Gatsby</h2>
+        </div>
+        <div class="toolbar-center">
+            <span id="pageProgress">Page 45 of 320</span>
+            <div class="progress-bar">
+                <div class="progress-fill" id="readingProgress" style="width: 14%"></div>
+            </div>
+        </div>
+        <div class="toolbar-right">
+            <button class="btn btn-icon" onclick="toggleSettings()" title="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button class="btn btn-icon" onclick="toggleBookmark()" title="Bookmark">
+                <i class="far fa-bookmark" id="bookmarkIcon"></i>
+            </button>
+            <button class="btn btn-icon" onclick="toggleFullscreen()" title="Fullscreen">
+                <i class="fas fa-expand"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Reader Settings Panel -->
+    <div id="readerSettings" class="reader-settings">
+        <div class="setting-group">
+            <label>Font Size</label>
+            <div class="font-size-controls">
+                <button onclick="changeFontSize(-1)">A-</button>
+                <span id="fontSizeValue">18px</span>
+                <button onclick="changeFontSize(1)">A+</button>
+            </div>
+        </div>
+        <div class="setting-group">
+            <label>Font Family</label>
+            <select id="fontFamily" onchange="changeFont()">
+                <option value="Merriweather">Serif (Merriweather)</option>
+                <option value="Poppins">Sans-serif (Poppins)</option>
+                <option value="Courier New">Monospace</option>
+            </select>
+        </div>
+        <div class="setting-group">
+            <label>Theme</label>
+            <div class="theme-options">
+                <button class="theme-btn light active" onclick="setTheme('light')" title="Light"></button>
+                <button class="theme-btn sepia" onclick="setTheme('sepia')" title="Sepia"></button>
+                <button class="theme-btn dark" onclick="setTheme('dark')" title="Dark"></button>
+            </div>
+        </div>
+        <div class="setting-group">
+            <label>Line Spacing</label>
+            <input type="range" min="1" max="3" step="0.5" value="1.5" id="lineSpacing" onchange="changeSpacing()">
+        </div>
+    </div>
+
+    <!-- Reader Content -->
+    <div class="reader-container" id="readerContainer">
+        <div class="reader-content" id="readerContent">
+            <h1>Chapter 1</h1>
+            <p>In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since.</p>
+            <p>"Whenever you feel like criticizing any one," he told me, "just remember that all the people in this world haven't had the advantages that you've had."</p>
+            <p>He didn't say any more, but we've always been unusually communicative in a reserved way, and I understood that he meant a great deal more than that. In consequence, I'm inclined to reserve all judgments, a habit that has opened up many curious natures to me and also made me the victim of not a few veteran bores.</p>
+            <p>The abnormal mind is quick to detect and attach itself to this quality when it appears in a normal person, and so it came about that in college I was unjustly accused of being a politician, because I was privy to the secret griefs of wild, unknown men. Most of the confidences were unsought — frequently I have feigned sleep, preoccupation, or a hostile levity when I realized by some unmistakable sign that an intimate revelation was quivering on the horizon; for the intimate revelations of young men, or at least the terms in which they express them, are usually plagiaristic and marred by obvious suppressions.</p>
+            <p>Reserving judgments is a matter of infinite hope. I am still a little afraid of missing something if I forget that, as my father snobbishly suggested, and I snobbishly repeat, a sense of the fundamental decencies is parcelled out unequally at birth.</p>
+            <p>And, after boasting this way of my tolerance, I come to the admission that it has a limit. Conduct may be founded on the hard rock or the wet marshes, but after a certain point I don't care what it's founded on. When I came back from the East last autumn I felt that I wanted the world to be in uniform and at a sort of moral attention forever; I wanted no more riotous excursions with privileged glimpses into the human heart. Only Gatsby, the man who gives his name to this book, was exempt from my reaction — Gatsby, who represented everything for which I have an unaffected scorn.</p>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="reader-nav">
+        <button class="nav-btn prev" onclick="prevPage()">
+            <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <button class="nav-btn next" onclick="nextPage()">
+            Next <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Table of Contents -->
+    <div id="tocPanel" class="toc-panel">
+        <h3>Table of Contents</h3>
+        <ul id="tocList">
+            <li class="active"><a href="#chapter1">Chapter 1</a></li>
+            <li><a href="#chapter2">Chapter 2</a></li>
+            <li><a href="#chapter3">Chapter 3</a></li>
+            <li><a href="#chapter4">Chapter 4</a></li>
+            <li><a href="#chapter5">Chapter 5</a></li>
+        </ul>
+    </div>
+
+    <script src="js/reader.js"></script>
+</body>
+</html>

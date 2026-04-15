@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibroZone - Digital Library Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>LibroZone</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="profile.html">My Library</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" id="navSearch" placeholder="Search books...">
+                    <button onclick="searchBooks()"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Read Anytime, <span class="gradient-text">Anywhere</span></h1>
+            <p>Access thousands of books instantly. Your personal digital library with smart recommendations and seamless reading experience.</p>
+            <div class="hero-buttons">
+                <a href="books.html" class="btn btn-large btn-primary">Explore Books</a>
+                <a href="#features" class="btn btn-large btn-outline">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>50K+</h3>
+                    <p>Books Available</p>
+                </div>
+                <div class="stat">
+                    <h3>100K+</h3>
+                    <p>Active Readers</p>
+                </div>
+                <div class="stat">
+                    <h3>4.9★</h3>
+                    <p>User Rating</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="floating-books">
+                <div class="book-float book-1">📚</div>
+                <div class="book-float book-2">📖</div>
+                <div class="book-float book-3">📕</div>
+                <div class="book-float book-4">📗</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title">Why Choose <span class="gradient-text">LibroZone</span>?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Access Anywhere</h3>
+                <p>Read your favorite books on any device, anywhere in the world. Cloud-synced progress.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Instant Downloads</h3>
+                <p>Download books for offline reading. Fast and secure downloads with one click.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Personal Library</h3>
+                <p>Create your own collection, save favorites, and organize books your way.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI Recommendations</h3>
+                <p>Smart suggestions based on your reading history and preferences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Books -->
+    <section class="popular-books">
+        <h2 class="section-title">Trending <span class="gradient-text">Now</span></h2>
+        <div class="books-grid" id="trendingBooks">
+            <!-- Populated by JS -->
+        </div>
+        <div class="center-btn">
+            <a href="books.html" class="btn btn-primary">View All Books</a>
+        </div>
+    </section>
+
+    <!-- Categories Preview -->
+    <section class="categories-preview">
+        <h2 class="section-title">Browse by <span class="gradient-text">Category</span></h2>
+        <div class="categories-grid">
+            <div class="category-card fiction">
+                <i class="fas fa-dragon"></i>
+                <h3>Fiction</h3>
+                <span>12,450 Books</span>
+            </div>
+            <div class="category-card education">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Education</h3>
+                <span>8,320 Books</span>
+            </div>
+            <div class="category-card technology">
+                <i class="fas fa-microchip"></i>
+                <h3>Technology</h3>
+                <span>5,890 Books</span>
+            </div>
+            <div class="category-card business">
+                <i class="fas fa-chart-line"></i>
+                <h3>Business</h3>
+                <span>4,560 Books</span>
+            </div>
+            <div class="category-card science">
+                <i class="fas fa-flask"></i>
+                <h3>Science</h3>
+                <span>6,780 Books</span>
+            </div>
+            <div class="category-card arts">
+                <i class="fas fa-palette"></i>
+                <h3>Arts & Design</h3>
+                <span>3,240 Books</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-book-open"></i> LibroZone</h3>
+                <p>Your gateway to unlimited knowledge. Read, learn, and grow with our vast collection of digital books.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="books.html">Browse Books</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="profile.html">My Library</a></li>
+                    <li><a href="admin.html">Admin Panel</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Subscribe for book recommendations and updates</p>
+                <div class="newsletter">
+                    <input type="email" placeholder="Enter your email">
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LibroZone. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

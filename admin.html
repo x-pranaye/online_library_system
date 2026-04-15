@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - LibroZone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Admin Navigation -->
+    <nav class="navbar admin-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>LibroZone Admin</span>
+            </a>
+            <div class="admin-actions">
+                <a href="index.html" class="btn btn-outline">View Site</a>
+                <a href="#" class="btn btn-danger" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-user">
+                <img src="https://via.placeholder.com/50" alt="Admin">
+                <div>
+                    <h4>Admin User</h4>
+                    <span>Super Admin</span>
+                </div>
+            </div>
+            <nav class="admin-menu">
+                <a href="#" class="active" onclick="showAdminSection('dashboard')">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="#" onclick="showAdminSection('books')">
+                    <i class="fas fa-book"></i> Manage Books
+                </a>
+                <a href="#" onclick="showAdminSection('users')">
+                    <i class="fas fa-users"></i> Users
+                </a>
+                <a href="#" onclick="showAdminSection('categories')">
+                    <i class="fas fa-tags"></i> Categories
+                </a>
+                <a href="#" onclick="showAdminSection('reviews')">
+                    <i class="fas fa-star"></i> Reviews
+                </a>
+                <a href="#" onclick="showAdminSection('reports')">
+                    <i class="fas fa-chart-bar"></i> Reports
+                </a>
+                <a href="#" onclick="showAdminSection('settings')">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard -->
+            <div id="admin-dashboard" class="admin-section active">
+                <h1>Dashboard Overview</h1>
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <h3>12,450</h3>
+                            <p>Total Books</p>
+                        </div>
+                    </div>
+                    <div class="stat-card green">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h3>45,678</h3>
+                            <p>Active Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-card orange">
+                        <i class="fas fa-download"></i>
+                        <div>
+                            <h3>89,234</h3>
+                            <p>Downloads</p>
+                        </div>
+                    </div>
+                    <div class="stat-card purple">
+                        <i class="fas fa-eye"></i>
+                        <div>
+                            <h3>234,567</h3>
+                            <p>Total Views</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-row">
+                    <div class="admin-card">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <i class="fas fa-plus-circle green"></i>
+                                <div>
+                                    <p>New book added: "The Psychology of Money"</p>
+                                    <span>2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-user-plus blue"></i>
+                                <div>
+                                    <p>New user registered: Sarah Johnson</p>
+                                    <span>3 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-star yellow"></i>
+                                <div>
+                                    <p>New 5-star review on "Clean Code"</p>
+                                    <span>5 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-card">
+                        <h3>Popular Books</h3>
+                        <div class="popular-list">
+                            <div class="popular-item">
+                                <span class="rank">1</span>
+                                <img src="https://via.placeholder.com/40x60" alt="Book">
+                                <div>
+                                    <p>Atomic Habits</p>
+                                    <span>2,345 downloads</span>
+                                </div>
+                            </div>
+                            <div class="popular-item">
+                                <span class="rank">2</span>
+                                <img src="https://via.placeholder.com/40x60" alt="Book">
+                                <div>
+                                    <p>The Psychology of Money</p>
+                                    <span>1,892 downloads</span>
+                                </div>
+                            </div>
+                            <div class="popular-item">
+                                <span class="rank">3</span>
+                                <img src="https://via.placeholder.com/40x60" alt="Book">
+                                <div>
+                                    <p>Deep Work</p>
+                                    <span>1,567 downloads</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manage Books -->
+            <div id="admin-books" class="admin-section">
+                <div class="section-header">
+                    <h1>Manage Books</h1>
+                    <button class="btn btn-primary" onclick="openAddBookModal()">
+                        <i class="fas fa-plus"></i> Add New Book
+                    </button>
+                </div>
+                <div class="data-table-container">
+                    <div class="table-filters">
+                        <input type="text" placeholder="Search books..." id="adminBookSearch">
+                        <select id="adminCategoryFilter">
+                            <option>All Categories</option>
+                            <option>Fiction</option>
+                            <option>Education</option>
+                            <option>Technology</option>
+                        </select>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Cover</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Downloads</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="booksTableBody">
+                            <tr>
+                                <td><img src="https://via.placeholder.com/40x60" alt="Cover"></td>
+                                <td>The Great Gatsby</td>
+                                <td>F. Scott Fitzgerald</td>
+                                <td><span class="badge">Fiction</span></td>
+                                <td>1,234</td>
+                                <td>⭐ 4.8</td>
+                                <td>
+                                    <button class="btn btn-icon" onclick="editBook()"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-icon delete" onclick="deleteBook()"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Users -->
+            <div id="admin-users" class="admin-section">
+                <h1>User Management</h1>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Joined</th>
+                                <th>Books Read</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <img src="https://via.placeholder.com/40" alt="User">
+                                        <span>John Doe</span>
+                                    </div>
+                                </td>
+                                <td>john@example.com</td>
+                                <td>Mar 10, 2026</td>
+                                <td>42</td>
+                                <td><span class="badge active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-icon delete"><i class="fas fa-ban"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Book Modal -->
+    <div id="addBookModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Add New Book</h2>
+                <span class="close-modal" onclick="closeAddBookModal()">&times;</span>
+            </div>
+            <form id="addBookForm" class="modal-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Book Title *</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Author *</label>
+                        <input type="text" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <select required>
+                            <option>Fiction</option>
+                            <option>Education</option>
+                            <option>Technology</option>
+                            <option>Business</option>
+                            <option>Science</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Language</label>
+                        <select>
+                            <option>English</option>
+                            <option>Spanish</option>
+                            <option>French</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="4"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Cover Image</label>
+                        <input type="file" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label>Book File (PDF/EPUB)</label>
+                        <input type="file" accept=".pdf,.epub,.mobi">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeAddBookModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
